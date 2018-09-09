@@ -2,51 +2,39 @@
 
 namespace App\Controller;
 
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\ApiServices\ApiConsumer;
 
 class PruebaController extends AbstractController
 {
     /**
      * @Route("/prueba", name="prueba")
      */
-    public function index()
+
+
+
+    public function test(ApiConsumer $apiConsumer)
     {
+        $get_data = $apiConsumer->callAPI('GET', 'http://www.omdbapi.com/?s=papaya', false);
         $test = "pollardo";
-        return $this->render('prueba/index.html.twig', [
+        $response = json_decode($get_data, true);
+        return $this->render('prueba/prueba.html.twig', [
             'controller_name' => 'PruebaController',
             'test' => $test,
+            'results' => $response['Search'],
         ]);
-    }
-    public function test()
+}
+    /**
+     * @Route("/prueba/admin")
+     */
+    public function admin()
     {
-
-            $url="http://www.omdbapi.com/?i=tt3896198&apikey=6acd7a13";
-                  //  Initiate curl
-            $ch = curl_init();
-            // Disable SSL verification
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            // Will return the response, if false it print the response
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // Set the url
-            curl_setopt($ch, CURLOPT_URL,$url);
-            // Execute
-            $result=curl_exec($ch);
-            // Closing
-            curl_close($ch);
-
-            // Will dump a beauty json :3
-            $arraychido=json_decode($result, true);
-              $info="pollardo";
-
-              //var_dump($arraychido);
-              
-
-              echo $arraychido['Title'];
-
-        return $this->render('prueba/index.html.twig', [
-            'controller_name' => 'PruebaController',
-            'test' => $info,
-        ]);
+        return new Response('<html><body>Admin page!</body></html>');
     }
+
+
+
 }

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {% endblock %}
+
+{% block body %}
+  <a href="/logout"><button type="button">Cerrar Sesion</button></a>
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <ul>
+          <li>Titulo: {{ titulo }}</li>
+          <li>Año: {{ año }}</li>
+          <li>Estreno: {{ estreno }}</li>
+          <li>Genero: {{ genero }}</li>
+          <li>Duracion: {{ duracion }}</li>
+          <li>Director: {{ director }}</li>
+          <li>Idioma: {{ idioma }}</li>
+          <li>Pais: {{ pais }}</li>
+          <li>ImdbID: {{ ID }}</li>
+          <img src="{{ poster }}"></img>
+    </ul>
+    <a href="/favorito\?id={{ ID }}"><button type="button">Añadir a favoritos!</button></a>
+    <a href="/busqueda"><button type="button">Volver atrás</button></a>
+
+</div>
+{% endblock %}

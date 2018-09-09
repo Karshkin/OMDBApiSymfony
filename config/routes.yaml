@@ -4,3 +4,8 @@
 prueba_test:
     path:     /prueba/test
     controller: App\Controller\PruebaController::test
+login:
+    path:       /
+    controller: App\Controller\SecurityController::login
+logout:
+    path:   /logout

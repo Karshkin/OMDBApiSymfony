@@ -17,16 +17,46 @@ class UsersController extends AbstractController
      */
     public function index(UserInterface $user)
     {
-                
+
 
                     $uri = $_SERVER['REQUEST_URI'];
 
                     $userId = $user->getId();
 
-                    $posts = $this->getDoctrine()->getRepository('App:Users')->findById($userId);
+
+                    $em = $this->getDoctrine()->getManager();
+                      $repository = $em->getRepository('App:Favorito');
+                      $query = $repository->createQueryBuilder('f')
+                          ->innerJoin('f.usuario', 'u')
+                          ->groupBy('f.imdbID')
+                          ->where('u.id = :user_id')
+                          ->setParameter('user_id', $userId)
+                          ->getQuery()->getResult();
+
+                    /*$em = $this->getDoctrine()->getManager();
+                    $query = $em->createQuery(
+                        'SELECT f.imdb_id FROM App:Favorito f, favorito_users fu, App:Users u
+                        where f.id=fu.favorito_id and fu.users_id=u.id and u.id=:user_id'
+                    )->setParameter('user_id', $userId);
+                    $tasks = $query->getResult();*/
+
+
 
         return $this->render('users/index.html.twig', [
-            'posts' => $posts,
+            'movies' => $query,
         ]);
     }
 }
+/*
+
+
+$users = $this->getDoctrine()
+->getRepository(Users::class)
+->find($userId);
+
+$favorito = $this->getDoctrine()
+->getRepository(Favorito::class)
+->findByUsuario($userId);
+
+$users = $this->getDoctrine()->getRepository('App:Users')->findById($userId);
+$favs = $this->getDoctrine()->getRepository('App:Favorito')->findByUsuario($userId);*/

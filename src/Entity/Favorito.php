@@ -24,6 +24,11 @@ class Favorito
     private $imdbID;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Users", inversedBy="favoritos")
      */
     private $usuario;
@@ -41,6 +46,18 @@ class Favorito
     public function getImdbID(): ?string
     {
         return $this->imdbID;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function setImdbID(string $imdbID): self

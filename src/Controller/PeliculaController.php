@@ -64,14 +64,18 @@ class PeliculaController extends AbstractController
 
               $uri = $_SERVER['REQUEST_URI'];
               $imdbID = $_GET['id'];
+              $titulo = $_GET['title'];
               $userId = $user->getId();
               $users = $this->getDoctrine()
                ->getRepository(Users::class)
                ->find($userId);
 
+
+
              $favorito = new Favorito();
              $favorito->addUsuario($users);
              $favorito->setImdbID($imdbID);
+             $favorito->setTitle($titulo);
 
 
 

@@ -1,33 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Buscador{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+{% endblock %}
 {% block body %}
-<a href="/logout"><button type="button">Cerrar Sesion</button></a>
+<a href="/users"><button type="button" class="btn btn-block ">Usuario</button></a>
+<a href="/logout"><button type="button" class="btn btn-block">Cerrar Sesion</button></a>
+
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
 <div class="example-wrapper">
-    <div>
-    {{ form(form) }}
+    <div class = "form-control form-control-lg col-md-10 col-lg-8 col-xl-7 mx-auto">
+    {{ form (form) }}
     </div>
-    <ul>
+    <ul class="row">
     {% for movie in results %}
-      <div class="row">
-        <a href="pelicula\?id={{ movie.imdbID }}" ><div class="col-md-6 click"  >{{ movie.Title }}<br><img src="{{ movie.Poster }}" href="pelicula\?id={{ movie.imdbID }}" height="200" width="200" ></div></a>
+      <div class="col-sm-4 col-md-4" style="padding:5px">
+        <a href="pelicula\?id={{ movie.imdbID }}" ><div class="text-center">{{ movie.Title }}</div><div class="text-center click img-responsive center-block"><img src="{{ movie.Poster }}" class="rounded" href="pelicula\?id={{ movie.imdbID }}" height="300" width="200" ></div></a>
         <div id="informacion" onload="myFunction()"></div>
       </div>
     {% endfor %}
     </ul>
 
 </div>
-{% endblock %}
-
-{% block javascripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <script src="{{ asset('js/mostrar.js') }}" type="text/javascript"></script>
 {% endblock %}

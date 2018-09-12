@@ -37,7 +37,6 @@ class BusquedaController extends AbstractController{
         $url = 'http://www.omdbapi.com/?s='.$data;
         $get_data = $apiConsumer->callAPI('GET', $url, false);
         $response = json_decode($get_data, true);
-        var_dump($response);
         } else {
           $data = "erroooooor";
         }

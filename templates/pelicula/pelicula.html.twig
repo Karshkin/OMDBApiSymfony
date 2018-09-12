@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {% endblock %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+{% endblock %}
 {% block body %}
-  <a href="/logout"><button type="button">Cerrar Sesion</button></a>
+<a href="/users"><button type="button" class="btn btn-block ">Usuario</button></a>
+<a href="/logout"><button type="button" class="btn btn-block">Cerrar Sesion</button></a>
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -11,19 +15,20 @@
 
 <div class="example-wrapper">
     <ul>
-          <li>Titulo: {{ titulo }}</li>
-          <li>Año: {{ año }}</li>
-          <li>Estreno: {{ estreno }}</li>
-          <li>Genero: {{ genero }}</li>
-          <li>Duracion: {{ duracion }}</li>
-          <li>Director: {{ director }}</li>
-          <li>Idioma: {{ idioma }}</li>
-          <li>Pais: {{ pais }}</li>
-          <li>ImdbID: {{ ID }}</li>
-          <img src="{{ poster }}"></img>
+          <li class="list-group-item">Titulo: {{ titulo }}</li>
+          <li class="list-group-item">Año: {{ año }}</li>
+          <li class="list-group-item">Estreno: {{ estreno }}</li>
+          <li class="list-group-item">Genero: {{ genero }}</li>
+          <li class="list-group-item">Duracion: {{ duracion }}</li>
+          <li class="list-group-item">Director: {{ director }}</li>
+          <li class="list-group-item">Idioma: {{ idioma }}</li>
+          <li class="list-group-item">Pais: {{ pais }}</li>
+          <li class="list-group-item">ImdbID: {{ ID }}</li>
+          <div style="padding:15px" class="text-center click img-responsive center-block"><img src="{{ poster }}" class="rounded"></img></div>
     </ul>
-    <a href="/favorito\?id={{ ID }}"><button type="button">Añadir a favoritos!</button></a>
-    <a href="/busqueda"><button type="button">Volver atrás</button></a>
+    <a href="/favorito\?id={{ ID }}&title={{ titulo }}"><button type="button" class="btn btn-block ">Añadir a favoritos!</button></a>
+    <br>
+    <a href="/busqueda"><button type="button" class="btn btn-block ">Volver atrás</button></a>
 
 </div>
 {% endblock %}
